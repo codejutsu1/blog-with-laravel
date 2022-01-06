@@ -15,7 +15,7 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('articles_id')
+            $table->foreignId('article_id')
                 ->nullable()
                 ->constrained()
                 ->onUpdate('cascade')

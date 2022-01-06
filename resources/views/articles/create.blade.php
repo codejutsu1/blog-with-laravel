@@ -15,7 +15,7 @@
                                
                            <h1 class="text-center font-semibold mb-5 text-2xl">Add New Article</h1>    
 
-                           <form method="POST" action="{{ route('articles.store') }}" class="space-y-3">
+                           <form method="POST" action="{{ route('articles.store') }}" class="space-y-3" enctype="multipart/form-data">
                                @csrf    
                                <div>    
                                    <x-label for="name" :value="__('Article Title*')" class="font-normal text-lg"/>    

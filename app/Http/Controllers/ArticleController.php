@@ -18,16 +18,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $posts = Article::all();
-        $category = Category::all();
-        $tag = Tag::all();
-
-        $user = User::where('id', 'articles_id');
-        dd($user);
-
-
-        // dd($tag);
-        return view('articles.index', compact(['posts', 'category', 'tag']));
+        $posts = Article::with('category','tag', 'user')->get();
+        
+        return view('articles.index', compact('posts'));
     }
 
     /**
@@ -70,9 +63,9 @@ class ArticleController extends Controller
         $article->user_id = $request->user()->id;
 
         $category->category = $validated['category'];
-        $category->articles_id = $articleId;
+        $category->article_id = $articleId;
 
-        $tag->articles_id = $articleId;
+        $tag->article_id = $articleId;
         $tag->tag = $validated['tag'];
         
         $article->save();

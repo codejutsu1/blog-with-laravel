@@ -21,8 +21,13 @@
                                 </div>
                                 <div class="border-2 border-gray-100 w-3/5 py-6 px-4 tracking-wider">
                                     <h1 class="font-semibold text-2xl">{{ $post->title }}</h1>
-                                    <p class="text-sm font-semibold my-2">Author: James Arthur</p>
-                                    <p class="text-xs font-semibold text-gray-400 italic">Categories: Politics | Education</p>
+                                    <p class="text-sm font-semibold my-2">{{ $post->user->name }}</p>
+                                    <p class="text-xs font-semibold text-gray-400 italic">Categories: 
+                                        @foreach($post->category as $value)
+                                            {{$value}},
+                                        @endforeach
+                                    </p>
+                                    <p class="text-sm font-semibold text-gray-400 italic">Tags: {{ $post->tag->tag }}  </p>
                                     <p class="tracking-wide mt-4">
                                         {{ $post->description }}
                                     </p>
