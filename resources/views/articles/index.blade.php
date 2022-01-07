@@ -22,12 +22,14 @@
                                 <div class="border-2 border-gray-100 w-3/5 py-6 px-4 tracking-wider">
                                     <h1 class="font-semibold text-2xl">{{ $post->title }}</h1>
                                     <p class="text-sm font-semibold my-2">{{ $post->user->name }}</p>
-                                    <p class="text-xs font-semibold text-gray-400 italic">Categories: 
+                                    <p class="text-sm font-semibold text-gray-400 italic">Category: 
+                                    @if($post->category)
                                         @foreach($post->category as $value)
-                                            {{$value}},
+                                            {{ $value}}
                                         @endforeach
-                                    </p>
-                                    <p class="text-sm font-semibold text-gray-400 italic">Tags: {{ $post->tag->tag }}  </p>
+                                    @endif    
+                                      </p>
+                                    <p class="text-sm font-semibold text-gray-400 italic">Tags: {{ $post->tag->tag ?? 'None'}}  </p>
                                     <p class="tracking-wide mt-4">
                                         {{ $post->description }}
                                     </p>
@@ -114,3 +116,9 @@
         </div>
     </div>
 </x-app-layout>
+
+
+<!-- 
+    1. Need to work on the article_id in the tag and category table
+    2.
+ -->
