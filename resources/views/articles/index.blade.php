@@ -13,7 +13,7 @@
                    <div class="flex justify-between">
                        <div class="w-3/6">
                            <h1 class="text-center mt-6 mb-12 font-semibold text-lg tracking-wider">Newest Articles</h1>
-
+ 
                            @foreach($posts as $post)
                            <div class="flex mb-10 shadow-md w-11/12 mx-auto">
                                 <div class="w-2/5 bg-gray-400">
@@ -33,6 +33,7 @@
                                     <p class="tracking-wide mt-4">
                                         {{ $post->description }}
                                     </p>
+                                    <a class="text-blue-500" href="{{ route('articles.show', $post->id) }}">Read more</a>
                                 </div>
                            </div>
                            @endforeach
@@ -120,5 +121,7 @@
 
 <!-- 
     1. Need to work on the article_id in the tag and category table
-    2.
+    2. Alignment of the article in the article.index
+    3. Category is not showing
+    4.
  -->

@@ -21,10 +21,11 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 
+    Route::get('/dashboard', [ArticleController::class, 'list'])->name('dashboard');
     Route::resource('articles', ArticleController::class);
 });
 

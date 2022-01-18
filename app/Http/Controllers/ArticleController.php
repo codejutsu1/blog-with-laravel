@@ -18,7 +18,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $posts = Article::with('category','tag', 'user')->take(20)->get();
+        $posts = Article::with('category','tag', 'user')->latest()->paginate(10);
                
         return view('articles.index', compact('posts'));
     }
@@ -96,7 +96,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view ('dashboard');
+        $posts = Article::with('category', 'tag', 'user')->where('id', $article->id)->get();
+        
+        return view('articles.show', compact('posts'));
     }
 
     /**
@@ -131,5 +133,10 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         //
+    }
+
+    public function list()
+    {
+        return view('dashboard');
     }
 }
