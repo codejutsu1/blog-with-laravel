@@ -25,7 +25,7 @@
                     </span>
                         <span class="font-semibold">Tags: {{ $post->tag->tag ?? 'None' }} </span>
                     </div>
-                    <div>
+                    <div class="text-center">
                         <p>
                             {{ $post->description }}
                         </p>

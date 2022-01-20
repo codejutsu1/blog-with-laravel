@@ -109,7 +109,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        $posts = Article::with('tag')->where('id', $article->id)->get();
         
+        return view('articles.edit', compact('posts'));
     }
 
     /**
@@ -121,7 +123,20 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        $posts = Article::with('tag')->where('id', $article->id)->get();
+        foreach($posts as $post)
+        {
+            $post->update([
+                'title' => $request->title,
+                'description' => $request->description
+            ]);
+            
+            $post->tag->update([
+                'tag' => $request->tag
+            ]);
+        }
+
+        return redirect()->route('dashboard')->with('success', 'Upload successful');
     }
 
     /**
@@ -132,11 +147,17 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $posts = Article::with('category', 'tag')->where('id', $article->id)->get();
+        foreach($posts as $post)
+        {
+            $post->delete();
+        }
+        return redirect()->route('dashboard');
     }
 
     public function list()
     {
-        return view('dashboard');
+        $posts = Article::with('category', 'tag', 'user')->where('user_id', auth()->user()->id)->get();
+        return view('dashboard', compact('posts'));
     }
 }
